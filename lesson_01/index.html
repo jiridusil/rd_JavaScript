@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Calculator Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="calculator">
+        <h1>Calculator</h1>
+        <input type="text" id="box" disabled>
+        <br>
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button onclick="chooseOperation('+')">+</button>
+        <br>
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button onclick="chooseOperation('-')">-</button>
+        <br>
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button onclick="chooseOperation('*')">*</button>
+        <br>
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="compute()">=</button>
+        <button onclick="clearD()">C</button>
+        <button onclick="chooseOperation('/')">/</button>
+    </div>
+
+    <script>
+        let currentNumber = '';
+        let previousNumber = '';
+        let operation = undefined;
+
+        function appendNumber(number) {
+            currentNumber = currentNumber.toString() + number.toString();
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('box').value = currentNumber;
+        }
+
+        function chooseOperation(op) {
+            if (currentNumber === '') return;
+            if (previousNumber !== '') {
+                compute();
+            }
+            operation = op;
+            previousNumber = currentNumber;
+            currentNumber = '';
+        }
+        function compute() {
+            let result;
+            const previousParsed = parseFloat(previousNumber);
+            const currentParsed = parseFloat(currentNumber);
+            if (isNaN(previousParsed) || isNaN(currentParsed)) return;
+            switch (operation) {
+                case '+':
+                    result = previousParsed + currentParsed;
+                    break;
+                case '-':
+                    result = previousParsed - currentParsed;
+                    break;
+                case '*':
+                    result = previousParsed * currentParsed;
+                    break;
+                case '/':
+                    result = previousParsed / currentParsed;
+                    break;
+            }
+            currentNumber = result;
+            operation = undefined;
+            previousNumber = '';
+            updateDisplay();
+        }
+
+        function clearD() {
+            currentNumber = '';
+            previousNumber = '';
+            operation = undefined;
+            updateDisplay();
+        }
+    </script>
+</body>
+
+</html>

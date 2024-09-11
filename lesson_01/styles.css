@@ -1,0 +1,24 @@
+body {
+    display: flex;
+    background-color: #f0f0f0;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+.calculator {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.calculator input, .calculator button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 1em;
+}
+.calculator input {
+    width: 220px;
+}
+.calculator button {
+    width: 50px;
+}

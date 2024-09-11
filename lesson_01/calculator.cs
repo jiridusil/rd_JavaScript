@@ -1,6 +1,7 @@
 let a = 5;
 let b = 2;
 let c = 0;
+let d = 2.3;
 
 function subscract(a, b)
 {
@@ -29,3 +30,5 @@ console.log('a * b = ' + multiply(a, b));
 console.log('a / b = ' + divide(a, b));
 console.log(`Deleni nulou: a = ${a}, c = ${c}`)
 console.log('a / c = ' + divide(a, c));
+console.log(`Desetinne cislo: a = ${a}, c = ${d}`)
+console.log('a / d = ' + divide(a, d));
