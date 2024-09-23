@@ -1,25 +1,21 @@
-let a = 5;
-let b = 2;
-let c = 0;
-let d = 2.3;
+const a = 5;
+const b = 2;
+const c = 0;
+const d = 2.3;
 
-function subscract(a, b)
-{
+function subscract(a, b) {
     return a - b;
 }
 
-function add(a, b)
-{
+function add(a, b) {
     return a + b;
 }
 
-function multiply(a, b)
-{
+function multiply(a, b) {
     return a * b;
 }
 
-function divide(a, b)
-{
+function divide(a, b) {
     return a / b;
 }
 
