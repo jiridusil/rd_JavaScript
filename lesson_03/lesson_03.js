@@ -33,10 +33,7 @@ console.log(biggestNumber(-2, -4, -11, -12));
 const array1 = [1, 20, 3];
 const array2 = [4, 5, 6, 22];
 
-const joinAndFindBiggest = () => { return [biggestNumber(...array1, ...array2)] };
-
-console.log(joinAndFindBiggest());
-
+console.log(biggestNumber(...array1, ...array2));
 
 //3. Arrow Funkce a Implicitní Return:
 //      Přepište obě funkce z prvního úkolu(pro konverzi teplot) jako arrow funkce s
@@ -56,12 +53,10 @@ console.log(transformFahrenheitToCelsius2(50));
 //      každý prvek pole a modifyArray by mělo vracet nové pole s transformovanými prvky.
 
 const modifyArray = (array, func) => {
-    return func(array);
+    return array.map(element => func(element));
 }
 
-const addTwo = (array) => {
-    return array.map(element => element + 2);
-}
+const addTwo = (number) => number + 2;
 
 console.log('Ukol 4:');
 console.log(modifyArray([10, 20, 30, -10], addTwo));
