@@ -67,11 +67,11 @@ console.log(modifyArray([10, 20, 30, -10], addTwo));
 //  přijímat pole a vracet nové pole.
 
 const pipeline = (array, ...funcs) => {
-    return funcs.reduce((acc, func) => func(acc), array);
+    return funcs.reduce((acc, func) => acc.map(func), array);
 };
 
-const addTen = array => array.map(element => element + 10);
-const multipleTwo = array => array.map(element => element * 2);
+const addTen = (number) => number + 10;
+const multipleTwo = (number) => number * 2;
 
 console.log('Bonus:');
 console.log(pipeline([-10, 0, 10, 20], addTen, multipleTwo));
