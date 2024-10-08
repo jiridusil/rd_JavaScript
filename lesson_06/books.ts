@@ -6,3 +6,5 @@ export type Book = {
     pageCount: number
     author: string
 }
+
+export default Book;

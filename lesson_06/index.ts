@@ -1,13 +1,14 @@
+import { Book } from './books';
 /* Vytvořte funkci getFullName, která jako parametr přijme objekt s povinnými
 vlastnostmi firstName(řetězec) a lastName(řetězec).Funkce vrátí řetězec s celým
 jménem.Použijte typování pro definování tvaru objektu v parametrech a návratové
 hodnoty funkce. */
 
-const getFullName = (firstName: string, lastName: string): string => {
+const getFullName = ({ firstName, lastName }: { firstName: string, lastName: string }): string => {
     return `${firstName} ${lastName}`;
 }
 
-console.log(`Full name is: ${getFullName('Karel', 'Vomacka')}`);
+console.log(`Full name is: ${getFullName({ firstName: 'Karel', lastName: 'Vomacka' })}`);
 
 
 /* Vytvořte rozhraní User s povinnými vlastnostmi id(číslo), name(řetězec), email
@@ -27,22 +28,20 @@ console.log('createUser: ', createUser(1, 'Karel', 'kaja@gott.cz'))
 
 /* Vytvořte třídu UserAccount s vlastnostmi username(řetězec) a isPremiumAccount
     (logická hodnota).Od třídy vytvořte rozhraní UserAccountInterface a exportujte ho. */
-
-class UserAccount implements UserAccountInterface {
+export interface UserAccountInterface {
     username: string;
     isPremiumAccount: boolean;
+}
+
+class UserAccount implements UserAccountInterface {
+    username;
+    isPremiumAccount;
 
     constructor(username: string, isPremiumAccount: boolean) {
         this.username = username;
         this.isPremiumAccount = isPremiumAccount;
     }
 }
-
-export interface UserAccountInterface {
-    username: string;
-    isPremiumAccount: boolean;
-}
-
 
 /* Vytvořte funkci getAdminUser, která nebude mít parametry a vrátí uživatele s
 povinnou rolí admin(řetězec).Použijte unii typů pro povolení vracení User nebo
@@ -60,25 +59,19 @@ type AdminUserType = {
     role: string,
 }
 
-const Users = [
+const Users: UserType[] | AdminUserType[] = [
     { id: 1, name: 'Karel', role: 'user' },
     { id: 2, name: 'Jiri', role: 'admin' },
 ]
 
 const getAdminUser = (): UserType | AdminUserType => {
-    return Users.find(user => user.role === 'admin') as AdminUserType;
+    return Users.find(user => user.role === 'admin') as UserType | AdminUserType;
 }
 console.log('Admin user is: ', getAdminUser());
 
 
 /* Vytvořte typ Book pro popis knihy, který bude obsahovat vlastnosti title(řetězec),
     pageCount(číslo) a author(řetězec).Vytvořte pole knih s alespoň 5 prvky. */
-
-type Book = {
-    title: string
-    pageCount: number
-    author: string
-}
 
 const books: Book[] = [
     { title: 'title1', pageCount: 50, author: 'author1' },
