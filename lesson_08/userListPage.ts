@@ -1,9 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs';
 
-const url = 'https://jsonplaceholder.typicode.com/users';
+export const url = 'https://jsonplaceholder.typicode.com/users';
 
-type User = {
+export type User = {
     id: number
     name: string
     username: string

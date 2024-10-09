@@ -1,31 +1,8 @@
+import { User } from './userListPage';
+import { url } from './userListPage';
+
 const fs = require('fs');
 const path = require('path');
-
-const url = 'https://jsonplaceholder.typicode.com/users';
-
-type User = {
-    id: number
-    name: string
-    username: string
-    email: string
-    address: {
-        street: string
-        suite: string
-        city: string
-        zipcode: string
-        geo: {
-            lat: string
-            lng: string
-        }
-    }
-    phone: string
-    website: string
-    company: {
-        name: string
-        catchPhrase: string
-        bs: string
-    }
-}
 
 const getUsers = async (): Promise<User[]> => {
     const response = await fetch(url);
@@ -77,10 +54,10 @@ const generateUserDetailPage = async (userId: number) => {
                 <p><strong>Name:</strong> ${user.name}</p>
                 <p><strong>Username:</strong> ${user.username}</p>
                 <p><strong>Email:</strong> ${user.email}</p>
-                <p><strong>Address:</strong> ${user.address.street}, ${user.address.suite}, ${user.address.city}, ${user.address.zipcode}</p>
+                <p><strong>Address:</strong> ${user.address?.street ?? 'N/A'}, ${user.address?.suite ?? 'N/A'}, ${user.address?.city ?? 'N/A'}, ${user.address?.zipcode ?? 'N/A'}</p>
                 <p><strong>Phone:</strong> ${user.phone}</p>
                 <p><strong>Website:</strong> ${user.website}</p>
-                <p><strong>Company:</strong> ${user.company.name}, ${user.company.catchPhrase}, ${user.company.bs}</p>
+                <p><strong>Company:</strong> ${user.company?.name}, ${user.company?.catchPhrase}, ${user.company?.bs}</p>
             </div>
         </body>
         </html>
