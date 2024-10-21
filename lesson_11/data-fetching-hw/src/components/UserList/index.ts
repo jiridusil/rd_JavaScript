@@ -1,3 +1,3 @@
-import { UserList, SecondFunction } from "./UserList";
+import { UserList } from './UserList';
 
-export { UserList, SecondFunction };
+export { UserList };

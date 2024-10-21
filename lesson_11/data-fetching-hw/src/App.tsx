@@ -1,18 +1,14 @@
+import React from 'react';
+import logo from './logo.svg';
+// import './App.css';
 import { UserList } from './components/UserList';
-import { UserDefault } from './components/UserDefault';
-import { ProductList } from './components/ProductList';
-import { useState } from 'react';
 
-const App = () => {
-  const [localStorageProducts, setLocalStorageProducts] = useState<string>(
-    localStorage.getItem("products") || "[]"
-  );
-
+function App() {
   return (
-    <>
-      <UserDefault />
-    </>
+
+    <UserList />
+
   );
-};
+}
 
 export default App;

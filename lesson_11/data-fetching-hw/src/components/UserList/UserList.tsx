@@ -1,4 +1,4 @@
-import { PaperClipIcon } from '@heroicons/react/20/solid'
+import { useEffect, useState } from "react";
 
 /*  
 Cíl: Vytvořit React komponentu, která načítá a zobrazuje seznam uživatelů z API
@@ -6,9 +6,9 @@ pomocí hooku useEffect.
 
 ● Nastavení projektu:
     ○ Vytvořte nový React projekt pomocí Create React App:
-        npx create - react - app data - fetching - hw--template typescript
+        npx create-react-app data-fetching-hw --template typescript
     ○ Přejděte do nově vytvořené složky:
-        cd data - fetching - hw
+        cd data-fetching-hw
 ● Vytvoření komponenty:
     ○ V src / components složce vytvořte nový soubor s názvem UserList.tsx
     ○ V tomto souboru vytvořte funkční komponentu UserList
@@ -24,8 +24,6 @@ pomocí hooku useEffect.
     ○ Přidejte nový state pro ukládání chybových zpráv
     ○ Zobrazte chybovou zprávu uživateli, pokud načtení dat selže
 */
-
-import { useEffect, useState } from "react";
 
 const url = 'https://jsonplaceholder.typicode.com/users';
 
@@ -55,47 +53,51 @@ export type User = {
 
 export const UserList = () => {
     const [users, setUsers] = useState<User[]>();
+    const [error, setError] = useState<string>();
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(url);
+            if (!response.ok) {
+                setError('Data se nepodařilo načíst');
+                return;
+            }
             const data = await response.json();
             setUsers(data);
         };
         fetchData();
     }, []);
 
+    if (error) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <p>{error}</p>
+            </div>
+        );
+    }
+
+    if (!users) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <p>Načítání...</p>
+            </div>
+        )
+    }
     return (
-        // <ul role="list" className="divide-y divide-gray-100">
-        //     {users?.map((user) => (
-        //         <li key={user.email} className="flex justify-between gap-x-6 py-5">
-        //             <div className="flex min-w-0 gap-x-4">
-        //                 <div className="min-w-0 flex-auto">
-        //                     <p className="text-sm font-semibold leading-6 text-gray-900">Name: {user.name}</p>
-        //                     <p className="mt-1 truncate text-xs leading-5 text-gray-500">Email: {user.email}</p>
-        //                 </div>
-        //             </div>
-        //             <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-        //                 <p className="text-sm leading-6 text-gray-900">Company: {user.company?.name}</p>
-        //             </div>
-        //         </li>
-        //     ))}
-        // </ul>
-        <ul role="list" className="divide-y divide-gray-100">
-            {users?.map((person) => (
-                <li key={person.email} className="flex justify-between gap-x-6 py-5">
-                    <div className="flex min-w-0 gap-x-4">
-                        <div className="min-w-0 flex-auto">
-                            <p className="text-sm font-semibold leading-6 text-gray-900">{person.name}</p>
-                            <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.email}</p>
+        <div className="flex justify-center items-center min-h-screen">
+            <ul role="list" className="divide-y divide-gray-100">
+                {users?.map((user) => (
+                    <li key={user.email} className="flex justify-between gap-x-6 py-5">
+                        <div className="flex min-w-0 gap-x-4">
+                            <div className="min-w-0 flex-auto">
+                                <p className="text-sm font-semibold leading-6 text-gray-900">{user.name}</p>
+                                <p className="mt-1 truncate text-xs leading-5 text-gray-500">Email: {user.email}</p>
+                                <p className="mt-1 truncate text-xs leading-5 text-gray-500">Company: {user.company?.name}</p>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            ))}
-        </ul>
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 };
-
-export const SecondFunction = () => {
-    return <h2>Druha metoda</h2>
-}
