@@ -25,7 +25,7 @@ pomocí hooku useEffect.
     ○ Zobrazte chybovou zprávu uživateli, pokud načtení dat selže
 */
 
-const url = 'https://jsonplaceholder.typicode.com/users';
+
 
 export type User = {
     id: number
@@ -52,21 +52,36 @@ export type User = {
 }
 
 export const UserList = () => {
+    const url = 'https://jsonplaceholder.typicode.com/users';
     const [users, setUsers] = useState<User[]>();
-    const [error, setError] = useState<string>();
+    const [error, setError] = useState<string | null>();
+    const [loading, setLoading] = useState<boolean>();
+
+    const fetchData = async () => {
+        setLoading(true);
+        const response = await fetch(url);
+        if (!response.ok) {
+            setError('Data se nepodařilo načíst');
+            setLoading(false);
+            return;
+        }
+        const data = await response.json();
+        setError(null);
+        setLoading(false);
+        setUsers(data);
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(url);
-            if (!response.ok) {
-                setError('Data se nepodařilo načíst');
-                return;
-            }
-            const data = await response.json();
-            setUsers(data);
-        };
         fetchData();
-    }, []);
+    }, [url]);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <p>Načítání...</p>
+            </div>
+        )
+    }
 
     if (error) {
         return (
@@ -76,15 +91,8 @@ export const UserList = () => {
         );
     }
 
-    if (!users) {
-        return (
-            <div className="flex justify-center items-center min-h-screen">
-                <p>Načítání...</p>
-            </div>
-        )
-    }
     return (
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex flex-direction-column justify-center items-center min-h-screen">
             <ul role="list" className="divide-y divide-gray-100">
                 {users?.map((user) => (
                     <li key={user.email} className="flex justify-between gap-x-6 py-5">
