@@ -57,21 +57,20 @@ export const UserList = () => {
     const [error, setError] = useState<string | null>();
     const [loading, setLoading] = useState<boolean>();
 
-    const fetchData = async () => {
-        setLoading(true);
-        const response = await fetch(url);
-        if (!response.ok) {
-            setError('Data se nepodařilo načíst');
-            setLoading(false);
-            return;
-        }
-        const data = await response.json();
-        setError(null);
-        setLoading(false);
-        setUsers(data);
-    };
-
     useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            const response = await fetch(url);
+            if (!response.ok) {
+                setError('Data se nepodařilo načíst');
+                setLoading(false);
+                return;
+            }
+            const data = await response.json();
+            setError(null);
+            setLoading(false);
+            setUsers(data);
+        };
         fetchData();
     }, [url]);
 
