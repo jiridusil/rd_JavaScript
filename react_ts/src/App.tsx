@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { ProductList } from './components/ProductList';
-import { AddProduct } from './components/AddProduct';
+import { AddProductForm } from './components/AddProductForm';
+import { ThemeContext } from './components/ThemeContext';
+import { ThemeSwitcher } from './components/ThemeSwitcher';
 
 function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [localStorageProducts, setLocalStorageProducts] =
     useState<string>(localStorage.getItem('products') || '[]');
-  return (
-    <div>
 
+  return (
+    <ThemeContext.Provider value={theme}>
+      <ThemeSwitcher setTheme={setTheme} />
+      <AddProductForm updateProducts={setLocalStorageProducts} />
       <ProductList localStorageProducts={localStorageProducts} />
-      <AddProduct updateProducts={setLocalStorageProducts} />
-    </div>
+    </ThemeContext.Provider>
   );
 }
 
