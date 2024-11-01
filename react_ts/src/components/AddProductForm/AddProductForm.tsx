@@ -4,6 +4,7 @@ import { Input } from '../Input';
 import { TextArea } from '../TextArea';
 import { Select } from '../Select';
 import { ThemeContext } from '../ThemeContext';
+import { useNavigate } from 'react-router-dom';
 
 
 type FormData = {
@@ -22,14 +23,11 @@ const defaultValues: FormData = {
     image: ''
 };
 
-type Props = {
-    updateProducts: React.Dispatch<React.SetStateAction<string>>
-}
-
-export const AddProductForm = ({ updateProducts }: Props) => {
+export const AddProductForm = () => {
     const [formData, setFormData] = useState<FormData>(defaultValues);
     const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
     const theme = useContext(ThemeContext);
+    const navigate = useNavigate();
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,9 +50,9 @@ export const AddProductForm = ({ updateProducts }: Props) => {
 
         const productsJson = JSON.stringify(products);
         localStorage.setItem('products', productsJson);
-        updateProducts(productsJson);
         setFormData(defaultValues);
         setFormSubmitting(false);
+        navigate('/product-list');
     }
 
     return (

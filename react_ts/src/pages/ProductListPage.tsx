@@ -5,6 +5,6 @@ export const ProductListPage = () => {
     const [localStorageProducts, setLocalStorageProducts] =
         useState<string>(localStorage.getItem('products') || '[]');
     return (
-        <ProductList localStorageProducts={localStorageProducts} />
+        <ProductList />
     )
 }

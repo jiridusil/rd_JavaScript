@@ -16,11 +16,9 @@ type Product = {
     }
 }
 
-type Props = {
-    localStorageProducts: string
-}
 
-export const ProductList = ({ localStorageProducts }: Props) => {
+
+export const ProductList = () => {
     const [products, setProducts] = useState<Product[]>();
     const theme = useContext(ThemeContext);
 
@@ -30,16 +28,17 @@ export const ProductList = ({ localStorageProducts }: Props) => {
         const fetchData = async () => {
             const response = await fetch(url);
             const data: Product[] = await response.json();
+            const localStorageProducts = localStorage.getItem('products') || '[]';
 
             setProducts([...data, ...JSON.parse(localStorageProducts)]);
         }
         fetchData();
-    }, [localStorageProducts]);
+    }, []);
 
     return (
         <div className={theme === 'light' ? 'bg-white' : 'bg-gray-900'}>
             < div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8" >
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900">Product List</h2>
 
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products?.map((product) => (

@@ -8,6 +8,7 @@ import { ProductList } from './components/ProductList';
 import { ProductListPage } from './pages/ProductListPage';
 import { Homepage } from './pages/Homepage';
 import { AddProductPage } from './pages/AddProductPage';
+import { Layout } from './components/Layout';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,16 +17,19 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Homepage />
-  },
-  {
-    path: '/product-list',
-    element: <ProductListPage />
-  },
-  {
-    path: '/add-product',
-    element: <AddProductPage />
-  },
+    element: <Layout />,
+    children: [{
+      path: '/',
+      element: <Homepage />
+    }, {
+      path: '/product-list',
+      element: <ProductListPage />
+    },
+    {
+      path: '/add-product',
+      element: <AddProductPage />
+    }]
+  }
 ])
 
 root.render(

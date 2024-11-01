@@ -5,5 +5,5 @@ export const AddProductPage = () => {
     const [localStorageProducts, setLocalStorageProducts] =
         useState<string>(localStorage.getItem('products') || '[]');
 
-    return <AddProductForm updateProducts={setLocalStorageProducts} />
+    return <AddProductForm />
 }
