@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../ThemeContext";
+import { Link } from "react-router-dom";
 
 const url = 'https://fakestoreapi.com/products';
 
@@ -53,10 +54,10 @@ export const ProductList = () => {
                             <div className="mt-4 flex justify-between">
                                 <div>
                                     <h3 className="text-sm text-gray-700">
-                                        <a href={`/product/${product.id}`}>
+                                        <Link to={`/product/${product.id}`}>
                                             <span aria-hidden="true" className="absolute inset-0" />
                                             {product.title}
-                                        </a>
+                                        </Link>
                                     </h3>
                                     <p className="mt-1 text-sm text-gray-500">{product.category}</p>
                                 </div>
@@ -71,6 +72,11 @@ export const ProductList = () => {
                     ))}
                 </div>
             </div >
+            <Link to='/add-product'
+                className="fixed bottom-20 right-4 bg-blue-500 text-white px-4 py-2 
+                rounded-full shadow-lg hover:bg-blue-600 transition duration-150 ease-in-out">
+                Add Product
+            </Link>
         </div >
 
     )

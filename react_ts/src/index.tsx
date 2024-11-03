@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ProductList } from './components/ProductList';
@@ -9,6 +8,7 @@ import { ProductListPage } from './pages/ProductListPage';
 import { Homepage } from './pages/Homepage';
 import { AddProductPage } from './pages/AddProductPage';
 import { Layout } from './components/Layout';
+import { productDetailLoader, ProductDetailPage } from './pages/ProductDetailPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,9 +28,16 @@ const router = createBrowserRouter([
     {
       path: '/add-product',
       element: <AddProductPage />
-    }]
+    },
+    {
+      path: 'product/:id',
+      element: <ProductDetailPage />,
+      loader: productDetailLoader
+    }
+    ]
   }
-])
+]);
+
 
 root.render(
   <RouterProvider router={router} />
