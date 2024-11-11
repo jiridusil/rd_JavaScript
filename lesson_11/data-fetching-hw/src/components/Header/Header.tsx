@@ -7,6 +7,7 @@ const navigation = [
     { name: 'Home', href: '/', current: true },
     { name: 'User List', href: '/user-list', current: false },
     { name: 'Theme Editor', href: '/theme-form', current: false },
+    { name: 'Theme Editor2', href: '/theme-form2', current: false },
 ]
 
 export const classNames = (...classes: Array<string | boolean>) => {

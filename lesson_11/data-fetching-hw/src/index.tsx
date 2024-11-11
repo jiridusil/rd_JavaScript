@@ -8,6 +8,8 @@ import { Layout } from './components/Layout';
 import { Homepage } from './components/pages/Homepage';
 import { UserListPage } from './components/pages/UserListPage';
 import { ThemeFormPage } from './components/pages/ThemeFormPage';
+import { ThemeFormPage2 } from './components/pages/ThemeFormPage2';
+import { UserDetailPage } from './components/pages/UserDetailPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
     {
       path: '/theme-form',
       element: <ThemeFormPage />
+    },
+    {
+      path: '/theme-form2',
+      element: <ThemeFormPage2 />
+    },
+    {
+      path: '/user/:id',
+      element: <UserDetailPage />
     }
     ]
   }
