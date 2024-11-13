@@ -8,8 +8,9 @@ import { Layout } from './components/Layout';
 import { Homepage } from './components/pages/Homepage';
 import { UserListPage } from './components/pages/UserListPage';
 import { ThemeFormPage } from './components/pages/ThemeFormPage';
-import { ThemeFormPage2 } from './components/pages/ThemeFormPage2';
+import { TestPage } from './components/pages/TestPage';
 import { UserDetailPage } from './components/pages/UserDetailPage';
+import { userDetailLoader } from './components/UserDetail';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -31,12 +32,13 @@ const router = createBrowserRouter([
       element: <ThemeFormPage />
     },
     {
-      path: '/theme-form2',
-      element: <ThemeFormPage2 />
+      path: '/test-page',
+      element: <TestPage />
     },
     {
       path: '/user/:id',
-      element: <UserDetailPage />
+      element: <UserDetailPage />,
+      loader: userDetailLoader
     }
     ]
   }

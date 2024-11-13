@@ -4,6 +4,9 @@ import { FormGroup, Label, Input, FormText, Button } from 'reactstrap';
 import { ThemePreview } from '../ThemePreview';
 import { useState } from 'react';
 import { button } from '../Styles';
+import { UserDetailModal } from '../UserDetailModal';
+import { UserListModal } from '../UserListModal';
+import { useTheme } from '../ThemeContext';
 
 export const ThemeForm = () => {
     const [primaryColor, setPrimaryColor] = useState('#0099ff');
@@ -13,6 +16,8 @@ export const ThemeForm = () => {
     const [headerColor, setHeaderColor] = useState('#cc0000');
     const [buttonColor, setButtonColor] = useState('#009933');
     const [buttonHoverColor, setButtonHoverColor] = useState('yellow');
+    const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+    const { theme, toggleTheme } = useTheme();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -26,16 +31,8 @@ export const ThemeForm = () => {
         console.log('buttonHoverColor', buttonHoverColor);
     }
 
-    const handlePrevewUser = () => {
-        console.log('Preview User');
-    }
-
-    const handlePreviewUserList = () => {
-        console.log('Preview User List');
-    }
-
     return (
-        <div className="d-flex justify-content-center">
+        <div className={`d-flex justify-content-center ${theme === 'dark' && 'bg-gray-400'}`}>
             <table>
                 <thead>
                     <tr>
@@ -141,8 +138,8 @@ export const ThemeForm = () => {
                                         <b>Previews</b>
                                     </Label>
                                     <div>
-                                        <Button style={button} onClick={handlePrevewUser}>Preview One User</Button>
-                                        <Button style={button} onClick={handlePreviewUserList}>Preview User List</Button>
+                                        <UserDetailModal textColor={textColor} backgroundColor={backgroundColor} />
+                                        <UserListModal />
                                     </div>
                                 </FormGroup>
                                 <FormGroup>

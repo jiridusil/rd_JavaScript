@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "../ThemeContext";
 import { Link } from "react-router-dom";
 
-export type User = {
+type User = {
     id: number
     name: string
     username: string

@@ -1,3 +1,3 @@
-import { button } from "./Style";
+import { buttonPrimary } from "./Style";
 
-export { button };
+export { buttonPrimary as button };

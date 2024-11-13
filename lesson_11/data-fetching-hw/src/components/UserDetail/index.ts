@@ -1,3 +1,3 @@
-import { UserDetail } from './UserDetail';
+import { UserDetail, userDetailLoader } from './UserDetail';
 
-export { UserDetail };
+export { UserDetail, userDetailLoader };
