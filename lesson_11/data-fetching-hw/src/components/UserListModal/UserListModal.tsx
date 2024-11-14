@@ -37,7 +37,7 @@ export const UserListModal = () => {
     }
     return (
         <>
-            <button onClick={openModal} style={button}>Open User Detail</button>
+            <button onClick={openModal} style={button}>Preview User List</button>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
