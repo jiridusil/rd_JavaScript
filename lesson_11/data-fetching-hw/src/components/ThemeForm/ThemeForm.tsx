@@ -1,38 +1,88 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form } from 'react-router-dom';
-import { FormGroup, Label, Input, FormText, Button } from 'reactstrap';
+import { FormGroup, Label, Input, Button } from 'reactstrap';
 import { ThemePreview } from '../ThemePreview';
 import { useState } from 'react';
-import { button } from '../Styles';
 import { UserDetailModal } from '../UserDetailModal';
 import { UserListModal } from '../UserListModal';
 import { useTheme } from '../ThemeContext';
 
+type Options = {
+    themeName: string
+    primaryColor: string
+    secondaryColor: string
+    textColor: string
+    headerColor: string
+    backgroundColor: string
+    buttonColor: string
+    buttonHoverColor: string
+}
+
 export const ThemeForm = () => {
+    const { theme, textColor, setTextColor, backgroundColor, setBackgroundColor
+        , headerColor, setHeaderColor } = useTheme();
     const [primaryColor, setPrimaryColor] = useState('#0099ff');
     const [secondaryColor, setSecondaryColor] = useState('#FFA500');
-    const [backgroundColor, setBackgroundColor] = useState('#cc8800');
-    const [textColor, setTextColor] = useState('#0000cc');
-    const [headerColor, setHeaderColor] = useState('#cc0000');
     const [buttonColor, setButtonColor] = useState('#009933');
     const [buttonHoverColor, setButtonHoverColor] = useState('yellow');
-    const [isUserModalOpen, setIsUserModalOpen] = useState(false);
-    const { theme, toggleTheme } = useTheme();
+    const [selectedColor, setSelectedTheme] = useState<string>('Theme');
+    const [options, setOptions] = useState<Options[]>([]);
+
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        console.log('primaryColor', primaryColor);
-        console.log('secondaryColor', secondaryColor);
-        console.log('backgroundColor', backgroundColor);
-        console.log('headerColor', headerColor);
-        console.log('textColor', textColor);
-        console.log('buttonColor', buttonColor);
-        console.log('buttonHoverColor', buttonHoverColor);
+        if (!localStorage.getItem('themes')) {
+            localStorage.setItem('themes', JSON.stringify([]));
+        }
+        const themes = JSON.parse(localStorage.getItem('themes')!);
+        const name = (event.target as HTMLFormElement).themeName.value
+        if (!name) {
+            const alertBox = document.createElement('div');
+            alertBox.textContent = 'Please type a name for your theme';
+            alertBox.style.position = 'fixed';
+            alertBox.style.bottom = '20px';
+            alertBox.style.right = '20px';
+            alertBox.style.backgroundColor = '#dc3545';
+            alertBox.style.color = 'white';
+            alertBox.style.padding = '10px';
+            alertBox.style.borderRadius = '5px';
+            document.body.appendChild(alertBox);
+            setTimeout(() => {
+                document.body.removeChild(alertBox);
+            }, 3000);
+            return;
+        }
+        themes.push({
+            themeName: name,
+            primaryColor,
+            secondaryColor,
+            headerColor,
+            backgroundColor,
+            buttonColor,
+            buttonHoverColor
+        });
+        const themesJson = JSON.stringify(themes);
+        localStorage.setItem('themes', themesJson);
+        (event.target as HTMLFormElement).reset();
+        setOptions(name);
+        setSelectedTheme(name);
+        const alertBox = document.createElement('div');
+        alertBox.textContent = 'New theme has been saved successfully!';
+        alertBox.style.position = 'fixed';
+        alertBox.style.bottom = '20px';
+        alertBox.style.right = '20px';
+        alertBox.style.backgroundColor = '#28a745';
+        alertBox.style.color = 'white';
+        alertBox.style.padding = '10px';
+        alertBox.style.borderRadius = '5px';
+        document.body.appendChild(alertBox);
+        setTimeout(() => {
+            document.body.removeChild(alertBox);
+        }, 3000);
     }
 
     return (
-        <div className={`d-flex justify-content-center ${theme === 'dark' && 'bg-gray-400'}`}>
+        <div className={`d-flex justify-content-center ${theme === 'dark' && {}}`}>
             <table>
                 <thead>
                     <tr>
@@ -46,7 +96,6 @@ export const ThemeForm = () => {
                                 primaryColor={primaryColor}
                                 secondaryColor={secondaryColor}
                                 headerColor={headerColor}
-                                textColor={textColor}
                                 backgroundColor={backgroundColor}
                                 buttonColor={buttonColor}
                             />
@@ -54,7 +103,7 @@ export const ThemeForm = () => {
                     </tr>
                     <tr>
                         <td align='center'>
-                            <Form onSubmit={handleSubmit} style={{ maxWidth: '500px', width: '100%' }}>
+                            <Form onSubmit={handleSubmit} style={{ color: textColor, background: backgroundColor, maxWidth: '500px', width: '100%' }}>
                                 <FormGroup>
                                     <Label for="primaryColor">
                                         Primary Color
@@ -101,7 +150,7 @@ export const ThemeForm = () => {
                                     <Input
                                         id="headerColor"
                                         name="headerColor"
-                                        placeholder="red"
+                                        placeholder="color placeholder"
                                         type="color"
                                         value={headerColor}
                                         onChange={(event) => setHeaderColor(event.target.value)}
@@ -131,6 +180,7 @@ export const ThemeForm = () => {
                                         type="color"
                                         value={buttonColor}
                                         onChange={(event) => setButtonColor(event.target.value)}
+                                        required
                                     />
                                 </FormGroup>
                                 <FormGroup>
@@ -138,7 +188,7 @@ export const ThemeForm = () => {
                                         <b>Previews</b>
                                     </Label>
                                     <div>
-                                        <UserDetailModal textColor={textColor} backgroundColor={backgroundColor} />
+                                        <UserDetailModal />
                                         <UserListModal />
                                     </div>
                                 </FormGroup>
@@ -153,7 +203,7 @@ export const ThemeForm = () => {
                                     />
                                 </FormGroup>
                                 <div className="d-flex justify-content-end">
-                                    <Button color="primary">
+                                    <Button color="primary" type="submit" >
                                         Save
                                     </Button>
                                 </div>

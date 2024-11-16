@@ -1,24 +1,46 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+import { darkColor, lightColor, defaultHeaderColor } from "../Styles/colorConstants";
 
 type Theme = 'light' | 'dark';
 
 type ThemeContextType = {
     theme: Theme;
     toggleTheme: () => void;
+    backgroundColor: string;
+    setBackgroundColor: (color: string) => void;
+    textColor: string;
+    setTextColor: (color: string) => void;
+    headerColor: string;
+    setHeaderColor: (color: string) => void;
 }
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 
 export const ThemeContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+
+
     const [theme, setTheme] = useState<Theme>('light');
+    const [backgroundColor, setBackgroundColor] = useState<string>(lightColor);
+    const [textColor, setTextColor] = useState<string>(darkColor);
+    const [headerColor, setHeaderColor] = useState<string>(defaultHeaderColor);
+    const [selectedColor, setSelectedTheme] = useState<string>();
 
     const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+        setTheme((prevTheme) => {
+            const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+            setBackgroundColor(newTheme === 'light' ? lightColor : darkColor);
+            setTextColor(newTheme === 'light' ? darkColor : lightColor);
+            return newTheme;
+        });
+        setSelectedTheme('theme');
+        console.log('selectedColor', selectedColor);
     }
 
+
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider
+            value={{ theme, toggleTheme, backgroundColor, setBackgroundColor, textColor, setTextColor, headerColor, setHeaderColor }}>
             {children}
         </ThemeContext.Provider>
     )

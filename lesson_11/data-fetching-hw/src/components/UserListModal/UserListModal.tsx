@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { button } from '../Styles';
 import { UserList } from '../UserList/UserList';
 import { buttonGray } from '../Styles/Style';
+import { useTheme } from '../ThemeContext';
 
 const customStyles = {
     content: {
@@ -20,17 +21,17 @@ const customStyles = {
 // Modal.setAppElement('#yourAppElement');
 
 export const UserListModal = () => {
-    let subtitle: any;
+    // let subtitle: any;
     const [modalIsOpen, setIsOpen] = useState(false);
 
     function openModal() {
         setIsOpen(true);
     }
 
-    function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        subtitle.style.color = 'gray';
-    }
+    // function afterOpenModal() {
+    //     // references are now sync'd and can be accessed.
+    //     subtitle.style.color = 'gray';
+    // }
 
     function closeModal() {
         setIsOpen(false);
@@ -40,13 +41,12 @@ export const UserListModal = () => {
             <button onClick={openModal} style={button}>Preview User List</button>
             <Modal
                 isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
+                // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
             >
                 <div style={{ maxHeight: '80vh', overflowY: 'auto' }}>
-                    <h2 ref={(_subtitle) => (subtitle = _subtitle)}>List of Users</h2>
                     <form>
                         <UserList />
                     </form>

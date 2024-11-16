@@ -1,15 +1,17 @@
 import { Button, Container } from "reactstrap";
+import { useTheme } from "../ThemeContext";
 
 type Props = {
     primaryColor: string;
     secondaryColor: string;
     headerColor: string;
-    textColor: string;
     backgroundColor: string;
     buttonColor: string;
 }
 
-export const ThemePreview = ({ primaryColor, secondaryColor, headerColor, textColor, backgroundColor, buttonColor }: Props) => {
+export const ThemePreview = ({ primaryColor, secondaryColor, headerColor, buttonColor }: Props) => {
+    const { textColor, backgroundColor } = useTheme();
+
     const table = {
         margin: '20px',
     }
@@ -21,6 +23,8 @@ export const ThemePreview = ({ primaryColor, secondaryColor, headerColor, textCo
         margin: '10px',
         backgroundColor: secondaryColor
     }
+
+
     return (
         <>
             <table style={table}>
@@ -33,7 +37,7 @@ export const ThemePreview = ({ primaryColor, secondaryColor, headerColor, textCo
                 </thead>
                 <tbody>
                     <tr>
-                        <td style={{ textAlign: 'center' }}>
+                        <td style={{ color: textColor, textAlign: 'center' }}>
                             <h3>List of elements for primary color</h3>
                             <hr />
                             <ul style={{ color: primaryColor }}>
@@ -63,7 +67,7 @@ export const ThemePreview = ({ primaryColor, secondaryColor, headerColor, textCo
                             </Container>
                         </td>
 
-                        <td style={{ textAlign: 'center' }}>
+                        <td style={{ color: textColor, textAlign: 'center' }}>
                             <h3>List of elements for secondary color</h3>
                             <hr />
                             <ul style={{ color: secondaryColor }}>

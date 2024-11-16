@@ -8,7 +8,6 @@ import { Layout } from './components/Layout';
 import { Homepage } from './components/pages/Homepage';
 import { UserListPage } from './components/pages/UserListPage';
 import { ThemeFormPage } from './components/pages/ThemeFormPage';
-import { TestPage } from './components/pages/TestPage';
 import { UserDetailPage } from './components/pages/UserDetailPage';
 import { userDetailLoader } from './components/UserDetail';
 
@@ -30,10 +29,6 @@ const router = createBrowserRouter([
     {
       path: '/theme-form',
       element: <ThemeFormPage />
-    },
-    {
-      path: '/test-page',
-      element: <TestPage />
     },
     {
       path: '/user/:id',
