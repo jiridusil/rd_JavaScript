@@ -63,8 +63,10 @@ export const ThemeForm = () => {
         });
         const themesJson = JSON.stringify(themes);
         localStorage.setItem('themes', themesJson);
+        const newThemes = JSON.parse(localStorage.getItem('themes')!);
+        console.log('newThemes', newThemes);
+        setOptions(newThemes);
         (event.target as HTMLFormElement).reset();
-        setOptions(name);
         setSelectedTheme(name);
         const alertBox = document.createElement('div');
         alertBox.textContent = 'New theme has been saved successfully!';

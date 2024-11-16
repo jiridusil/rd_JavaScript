@@ -14,27 +14,34 @@ type ThemeContextType = {
     setHeaderColor: (color: string) => void;
 }
 
+type Options = {
+    themeName: string
+    primaryColor: string
+    secondaryColor: string
+    textColor: string
+    headerColor: string
+    backgroundColor: string
+    buttonColor: string
+    buttonHoverColor: string
+}
+
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-
 export const ThemeContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-
-
     const [theme, setTheme] = useState<Theme>('light');
     const [backgroundColor, setBackgroundColor] = useState<string>(lightColor);
     const [textColor, setTextColor] = useState<string>(darkColor);
     const [headerColor, setHeaderColor] = useState<string>(defaultHeaderColor);
-    const [selectedColor, setSelectedTheme] = useState<string>();
+    const [selectedTheme, setSelectedTheme] = useState<string>();
 
     const toggleTheme = () => {
         setTheme((prevTheme) => {
             const newTheme = prevTheme === 'light' ? 'dark' : 'light';
             setBackgroundColor(newTheme === 'light' ? lightColor : darkColor);
             setTextColor(newTheme === 'light' ? darkColor : lightColor);
+            setSelectedTheme('Themes');
             return newTheme;
         });
-        setSelectedTheme('theme');
-        console.log('selectedColor', selectedColor);
     }
 
 
