@@ -20,12 +20,12 @@ type Options = {
 
 export const ThemeForm = () => {
     const { theme, textColor, setTextColor, backgroundColor, setBackgroundColor
-        , headerColor, setHeaderColor } = useTheme();
+        , headerColor, setHeaderColor, addTheme } = useTheme();
     const [primaryColor, setPrimaryColor] = useState('#0099ff');
     const [secondaryColor, setSecondaryColor] = useState('#FFA500');
     const [buttonColor, setButtonColor] = useState('#009933');
     const [buttonHoverColor, setButtonHoverColor] = useState('yellow');
-    const [selectedColor, setSelectedTheme] = useState<string>('Theme');
+    const [selectedTheme, setSelectedTheme] = useState<string>('Theme');
     const [options, setOptions] = useState<Options[]>([]);
 
 
@@ -35,6 +35,7 @@ export const ThemeForm = () => {
             localStorage.setItem('themes', JSON.stringify([]));
         }
         const themes = JSON.parse(localStorage.getItem('themes')!);
+
         const name = (event.target as HTMLFormElement).themeName.value
         if (!name) {
             const alertBox = document.createElement('div');
@@ -61,6 +62,18 @@ export const ThemeForm = () => {
             buttonColor,
             buttonHoverColor
         });
+
+        addTheme({
+            themeName: name,
+            textColor: textColor,
+            primaryColor,
+            secondaryColor,
+            headerColor,
+            backgroundColor,
+            buttonColor,
+            buttonHoverColor
+        });
+
         const themesJson = JSON.stringify(themes);
         localStorage.setItem('themes', themesJson);
         const newThemes = JSON.parse(localStorage.getItem('themes')!);
@@ -68,6 +81,8 @@ export const ThemeForm = () => {
         setOptions(newThemes);
         (event.target as HTMLFormElement).reset();
         setSelectedTheme(name);
+
+        //alert success
         const alertBox = document.createElement('div');
         alertBox.textContent = 'New theme has been saved successfully!';
         alertBox.style.position = 'fixed';

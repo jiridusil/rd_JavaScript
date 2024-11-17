@@ -14,19 +14,24 @@ type Options = {
 }
 
 export const ThemeDropdown: React.FC = () => {
-    const { setTextColor, setBackgroundColor, setHeaderColor } = useTheme();
+    const { setTextColor, setBackgroundColor, setHeaderColor, optionsNew } = useTheme();
     const [selectedTheme, setSelectedTheme] = useState<string>('Theme');
-    const [options, setOptions] = useState<Options[]>([]);
+    const [options, setOption] = useState<Options[]>([]);
 
     useEffect(() => {
         const storedThemes = localStorage.getItem('themes');
-        console.log('storedThemes', storedThemes);
+        // console.log('storedThemes', storedThemes);
         if (storedThemes) {
             const themesArray = JSON.parse(storedThemes);
-            setOptions(themesArray);
-            console.log('themesArray', themesArray);
+            // addTheme(themesArray);
+            options.push(themesArray);
+            setOption(themesArray);
+            if (themesArray.length > 0) {
+                setSelectedTheme(themesArray[themesArray.length - 1].themeName);
+            }
+            // console.log('themesArray', themesArray);
         }
-    }, []);
+    }, [optionsNew]);
 
     const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedTheme(e.target.value);
@@ -40,7 +45,6 @@ export const ThemeDropdown: React.FC = () => {
             <select onChange={handleThemeChange}
                 className='rounded-md px-3 py-2 mx-3 text-sm font-medium pr-10'
                 style={{ width: `${selectedTheme.length * 8 + 50}px` }}>
-                <option value='theme'>Themes</option>
                 {options.map((option, index) => (
                     <option key={index} value={option.themeName}>
                         {option.themeName}

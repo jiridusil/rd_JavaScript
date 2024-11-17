@@ -12,6 +12,8 @@ type ThemeContextType = {
     setTextColor: (color: string) => void;
     headerColor: string;
     setHeaderColor: (color: string) => void;
+    optionsNew: Options[];
+    addTheme: (theme: Options) => void;
 }
 
 type Options = {
@@ -27,12 +29,13 @@ type Options = {
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [theme, setTheme] = useState<Theme>('light');
     const [backgroundColor, setBackgroundColor] = useState<string>(lightColor);
     const [textColor, setTextColor] = useState<string>(darkColor);
     const [headerColor, setHeaderColor] = useState<string>(defaultHeaderColor);
     const [selectedTheme, setSelectedTheme] = useState<string>();
+    const [options, setOptions] = useState<Options[]>([]);
 
     const toggleTheme = () => {
         setTheme((prevTheme) => {
@@ -44,14 +47,30 @@ export const ThemeContextProvider: React.FC<{ children: ReactNode }> = ({ childr
         });
     }
 
+    const addTheme = (theme: Options) => {
+        setOptions((prevOptions) => [...prevOptions, theme]);
+        localStorage.setItem('themes', JSON.stringify([...options, theme]));
+    };
+
 
     return (
         <ThemeContext.Provider
-            value={{ theme, toggleTheme, backgroundColor, setBackgroundColor, textColor, setTextColor, headerColor, setHeaderColor }}>
+            value={{
+                theme,
+                toggleTheme,
+                backgroundColor,
+                setBackgroundColor,
+                textColor,
+                setTextColor,
+                headerColor,
+                setHeaderColor,
+                optionsNew: options,
+                addTheme
+            }}>
             {children}
         </ThemeContext.Provider>
     )
-}
+};
 
 export const useTheme = () => {
     const context = useContext(ThemeContext);
@@ -59,4 +78,4 @@ export const useTheme = () => {
         throw new Error('useTheme must be used within a ThemeContextProvider');
     }
     return context;
-}
+};
