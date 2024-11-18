@@ -4,7 +4,6 @@ import { button } from '../Styles';
 import { useTheme } from '../ThemeContext';
 import { Link } from 'react-router-dom';
 import { buttonGray } from '../Styles/Style';
-import { colors } from '@mui/material';
 
 const customStyles = {
     content: {

@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { Theme, Options, ThemeContextType, defaultThemeContext, themeDefaults } from "../Types/GeneralTypes";
 
-
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -14,16 +13,6 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const [buttonColor, setButtonColor] = useState<string>(defaultThemeContext.buttonColor);
     const [selectedTheme, setSelectedTheme] = useState<string>('');
     const [options, setOptions] = useState<Options[]>([]);
-
-    // const toggleTheme = () => {
-    //     setTheme((prevTheme) => {
-    //         const newTheme = prevTheme === 'light' ? 'dark' : 'light';
-    //         setBackgroundColor(newTheme === 'light' ? themeDefaults.lightColor : themeDefaults.darkColor);
-    //         setTextColor(newTheme === 'light' ? themeDefaults.darkColor : themeDefaults.lightColor);
-    //         setSelectedTheme('Themes');
-    //         return newTheme;
-    //     });
-    // }
 
     const addTheme = (theme: Options) => {
         setOptions((prevOptions) => [...prevOptions, theme]);

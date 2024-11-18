@@ -10,7 +10,6 @@ export const ThemeDropdown: React.FC = () => {
 
     useEffect(() => {
         const storedThemes = localStorage.getItem('themes');
-        // console.log('storedThemes', storedThemes);
         if (storedThemes) {
             const themesArray = JSON.parse(storedThemes);
             setOption(themesArray);

@@ -13,7 +13,7 @@ export const UserDetail = () => {
     const [user, setUser] = useState<User>();
     const [error, setError] = useState<string | null>();
     const [loading, setLoading] = useState<boolean>();
-    const { theme, toggleTheme, textColor, backgroundColor, headerColor } = useTheme();
+    const { textColor, backgroundColor, headerColor } = useTheme();
 
     useEffect(() => {
         const fetchData = async () => {
