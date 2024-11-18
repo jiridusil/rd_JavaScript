@@ -1,6 +1,6 @@
 export const buttonPrimary = {
     backgroundColor: 'navy',
-    color: 'white',
+    color: 'black',
     border: 'none',
     padding: '10px 20px',
     borderRadius: '5px',

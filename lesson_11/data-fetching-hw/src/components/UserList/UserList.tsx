@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "../ThemeContext";
 import { Link } from "react-router-dom";
-import { User } from "../Types/General";
+import { User } from "../Types/GeneralTypes";
 
 export const UserList = () => {
     const url = 'https://jsonplaceholder.typicode.com/users';

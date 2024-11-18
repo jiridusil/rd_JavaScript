@@ -7,19 +7,20 @@ type Props = {
     headerColor: string;
     backgroundColor: string;
     buttonColor: string;
+    buttonHoverColor: string;
 }
 
-export const ThemePreview = ({ primaryColor, secondaryColor, headerColor, buttonColor }: Props) => {
+export const ThemePreview = ({ primaryColor, secondaryColor, headerColor, buttonColor, buttonHoverColor }: Props) => {
     const { textColor, backgroundColor } = useTheme();
 
     const table = { margin: '20px', }
     const primaryButton = {
         margin: '10px',
-        backgroundColor: primaryColor
+        backgroundColor: primaryColor,
     }
     const secondaryButton = {
         margin: '10px',
-        backgroundColor: secondaryColor
+        backgroundColor: secondaryColor,
     }
 
 
@@ -54,10 +55,20 @@ export const ThemePreview = ({ primaryColor, secondaryColor, headerColor, button
                                     <p style={{ color: textColor }}><b>Odstavec textu</b></p>
                                 </div>
                                 <div style={{ marginBottom: '10px' }}>
-                                    <button className="btn" style={{ background: buttonColor }}>Primary Button</button>
+                                    <button
+                                        className="btn"
+                                        style={{ background: buttonColor }}
+                                        onMouseEnter={(e) => e.currentTarget.style.background = buttonHoverColor}
+                                        onMouseLeave={(e) => e.currentTarget.style.background = buttonColor}
+                                    >
+                                        Primary Button
+                                    </button>
                                 </div>
                                 <div style={{ marginBottom: '10px' }}>
-                                    <button className="btn" style={{ background: buttonColor }}>Secondary Button</button>
+                                    <button className="btn" style={{ background: buttonColor }}
+                                        onMouseEnter={(e) => e.currentTarget.style.background = buttonHoverColor}
+                                        onMouseLeave={(e) => e.currentTarget.style.background = buttonColor}
+                                    >Secondary Button</button>
                                 </div>
                                 <div style={{ marginBottom: '10px' }}>
                                     <hr className="m-6" />

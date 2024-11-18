@@ -6,16 +6,18 @@ import { useState } from 'react';
 import { UserDetailModal } from '../UserDetailModal';
 import { UserListModal } from '../UserListModal';
 import { useTheme } from '../ThemeContext';
-import { Options } from '../Types/General';
+import { Options } from '../Types/GeneralTypes';
 
 export const ThemeForm = () => {
-    const { theme, textColor, setTextColor, backgroundColor, setBackgroundColor
-        , headerColor, setHeaderColor, addTheme } = useTheme();
-    const [primaryColor, setPrimaryColor] = useState('#0099ff');
-    const [secondaryColor, setSecondaryColor] = useState('#FFA500');
-    const [buttonColor, setButtonColor] = useState('#009933');
-    const [buttonHoverColor, setButtonHoverColor] = useState('yellow');
-    const [selectedTheme, setSelectedTheme] = useState<string>('Theme');
+    const { theme,
+        primaryColor, setPrimaryColor,
+        secondaryColor, setSecondaryColor,
+        backgroundColor, setBackgroundColor,
+        headerColor, setHeaderColor,
+        textColor, setTextColor,
+        buttonColor, setButtonColor,
+        buttonHoverColor, setButtonHoverColor,
+        addTheme, setSelectedTheme } = useTheme();
     const [options, setOptions] = useState<Options[]>([]);
 
 
@@ -108,6 +110,7 @@ export const ThemeForm = () => {
                                 headerColor={headerColor}
                                 backgroundColor={backgroundColor}
                                 buttonColor={buttonColor}
+                                buttonHoverColor={buttonHoverColor}
                             />
                         </td>
                     </tr>
@@ -190,6 +193,20 @@ export const ThemeForm = () => {
                                         type="color"
                                         value={buttonColor}
                                         onChange={(event) => setButtonColor(event.target.value)}
+                                        required
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="buttonHoverColor">
+                                        Button hover color
+                                    </Label>
+                                    <Input
+                                        id="buttonHoverColor"
+                                        name="buttonHoverColor"
+                                        placeholder="color placeholder"
+                                        type="color"
+                                        value={buttonHoverColor}
+                                        onChange={(event) => setButtonHoverColor(event.target.value)}
                                         required
                                     />
                                 </FormGroup>

@@ -4,6 +4,7 @@ import { button } from '../Styles';
 import { useTheme } from '../ThemeContext';
 import { Link } from 'react-router-dom';
 import { buttonGray } from '../Styles/Style';
+import { colors } from '@mui/material';
 
 const customStyles = {
     content: {
@@ -18,7 +19,7 @@ const customStyles = {
 
 export const UserDetailModal = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
-    const { textColor, backgroundColor, headerColor } = useTheme();
+    const { textColor, backgroundColor, headerColor, buttonColor, buttonHoverColor } = useTheme();
 
     function openModal() { setIsOpen(true); }
     function closeModal() {
@@ -27,7 +28,10 @@ export const UserDetailModal = () => {
     }
     return (
         <>
-            <button onClick={openModal} style={button}>Preview User Detail</button>
+            <button onClick={openModal} style={{ ...button, color: textColor, background: buttonColor }}
+                onMouseEnter={(e) => e.currentTarget.style.background = buttonHoverColor}
+                onMouseLeave={(e) => e.currentTarget.style.background = buttonColor}
+            >Preview User Detail</button>
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}

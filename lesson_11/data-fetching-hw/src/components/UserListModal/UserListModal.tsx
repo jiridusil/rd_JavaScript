@@ -3,8 +3,10 @@ import Modal from 'react-modal';
 import { button } from '../Styles';
 import { UserList } from '../UserList/UserList';
 import { buttonGray, modalStyles } from '../Styles/Style';
+import { useTheme } from '../ThemeContext';
 
 export const UserListModal = () => {
+    const { textColor, buttonColor, buttonHoverColor } = useTheme();
     const [modalIsOpen, setIsOpen] = useState(false);
 
     function openModal() {
@@ -16,7 +18,10 @@ export const UserListModal = () => {
     }
     return (
         <>
-            <button onClick={openModal} style={button}>Preview User List</button>
+            <button onClick={openModal} style={{ ...button, color: textColor, background: buttonColor }}
+                onMouseEnter={(e) => e.currentTarget.style.background = buttonHoverColor}
+                onMouseLeave={(e) => e.currentTarget.style.background = buttonColor}
+            >Preview User List</button>
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}

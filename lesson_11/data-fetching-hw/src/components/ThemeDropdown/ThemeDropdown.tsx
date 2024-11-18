@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useTheme } from "../ThemeContext";
 import { useEffect } from "react";
-import { Options } from "../Types/General";
+import { Options } from "../Types/GeneralTypes";
 
 export const ThemeDropdown: React.FC = () => {
-    const { setTextColor, setBackgroundColor, setHeaderColor, optionsNew } = useTheme();
-    const [selectedTheme, setSelectedTheme] = useState<string>('Theme');
+    const { setPrimaryColor, setSecondaryColor, setBackgroundColor, setHeaderColor, setTextColor,
+        setButtonColor, setButtonHoverColor, optionsNew, selectedTheme, setSelectedTheme } = useTheme();
     const [options, setOption] = useState<Options[]>([]);
 
     useEffect(() => {
@@ -13,8 +13,6 @@ export const ThemeDropdown: React.FC = () => {
         // console.log('storedThemes', storedThemes);
         if (storedThemes) {
             const themesArray = JSON.parse(storedThemes);
-            // addTheme(themesArray);
-            // options.push(themesArray);
             setOption(themesArray);
             if (themesArray.length > 0) {
                 setSelectedTheme(themesArray[themesArray.length - 1].themeName);
@@ -25,16 +23,23 @@ export const ThemeDropdown: React.FC = () => {
 
     const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedTheme(e.target.value);
-        setTextColor(options.find(option => option.themeName === e.target.value)?.textColor || '');
+        setPrimaryColor(options.find(option => option.themeName === e.target.value)?.primaryColor || '');
+        setSecondaryColor(options.find(option => option.themeName === e.target.value)?.secondaryColor || '');
         setBackgroundColor(options.find(option => option.themeName === e.target.value)?.backgroundColor || '');
         setHeaderColor(options.find(option => option.themeName === e.target.value)?.headerColor || '');
+        setTextColor(options.find(option => option.themeName === e.target.value)?.textColor || '');
+        setButtonColor(options.find(option => option.themeName === e.target.value)?.buttonColor || '');
+        setButtonHoverColor(options.find(option => option.themeName === e.target.value)?.buttonHoverColor || '');
     }
 
     return (
         <div className='flex items-center justify-center'>
             <select onChange={handleThemeChange}
+                value={selectedTheme}
                 className='rounded-md px-3 py-2 mx-3 text-sm font-medium pr-10'
-                style={{ width: `${selectedTheme.length * 8 + 50}px` }}>
+                style={{ width: `${selectedTheme.length * 8 + 50}px` }}
+            >
+                <option value='Theme'>Themes</option>
                 {options.map((option, index) => (
                     <option key={index} value={option.themeName}>
                         {option.themeName}

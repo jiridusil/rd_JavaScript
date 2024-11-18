@@ -1,27 +1,29 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { darkColor, lightColor, defaultHeaderColor } from "../Styles/colorConstants";
-import { Theme, Options, ThemeContextType } from "../Types/General";
+import { Theme, Options, ThemeContextType, defaultThemeContext, themeDefaults } from "../Types/GeneralTypes";
 
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [theme, setTheme] = useState<Theme>('light');
-    const [backgroundColor, setBackgroundColor] = useState<string>(lightColor);
-    const [textColor, setTextColor] = useState<string>(darkColor);
-    const [headerColor, setHeaderColor] = useState<string>(defaultHeaderColor);
-    const [selectedTheme, setSelectedTheme] = useState<string>();
+    const [theme, setTheme] = useState<Theme>(defaultThemeContext.theme);
+    const [primaryColor, setPrimaryColor] = useState<string>(defaultThemeContext.primaryColor);
+    const [secondaryColor, setSecondaryColor] = useState<string>(defaultThemeContext.secondaryColor);
+    const [backgroundColor, setBackgroundColor] = useState<string>(defaultThemeContext.backgroundColor);
+    const [headerColor, setHeaderColor] = useState<string>(defaultThemeContext.headerColor);
+    const [textColor, setTextColor] = useState<string>(defaultThemeContext.textColor);
+    const [buttonColor, setButtonColor] = useState<string>(defaultThemeContext.buttonColor);
+    const [selectedTheme, setSelectedTheme] = useState<string>('');
     const [options, setOptions] = useState<Options[]>([]);
 
-    const toggleTheme = () => {
-        setTheme((prevTheme) => {
-            const newTheme = prevTheme === 'light' ? 'dark' : 'light';
-            setBackgroundColor(newTheme === 'light' ? lightColor : darkColor);
-            setTextColor(newTheme === 'light' ? darkColor : lightColor);
-            setSelectedTheme('Themes');
-            return newTheme;
-        });
-    }
+    // const toggleTheme = () => {
+    //     setTheme((prevTheme) => {
+    //         const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+    //         setBackgroundColor(newTheme === 'light' ? themeDefaults.lightColor : themeDefaults.darkColor);
+    //         setTextColor(newTheme === 'light' ? themeDefaults.darkColor : themeDefaults.lightColor);
+    //         setSelectedTheme('Themes');
+    //         return newTheme;
+    //     });
+    // }
 
     const addTheme = (theme: Options) => {
         setOptions((prevOptions) => [...prevOptions, theme]);
@@ -32,15 +34,25 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         <ThemeContext.Provider
             value={{
                 theme,
-                toggleTheme,
+                toggleTheme: () => { },
+                primaryColor,
+                setPrimaryColor,
+                secondaryColor,
+                setSecondaryColor,
                 backgroundColor,
                 setBackgroundColor,
-                textColor,
-                setTextColor,
                 headerColor,
                 setHeaderColor,
+                textColor,
+                setTextColor,
+                buttonColor,
+                setButtonColor,
+                buttonHoverColor: defaultThemeContext.buttonHoverColor,
+                setButtonHoverColor: defaultThemeContext.setButtonHoverColor,
                 optionsNew: options,
-                addTheme
+                addTheme,
+                selectedTheme,
+                setSelectedTheme
             }}>
             {children}
         </ThemeContext.Provider>

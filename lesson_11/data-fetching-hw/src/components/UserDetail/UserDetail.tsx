@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Params, useLoaderData } from "react-router-dom";
 import { useTheme } from "../ThemeContext";
-import { User } from "../Types/General";
+import { User } from "../Types/GeneralTypes";
 
 export const userDetailLoader = async ({ params }: { params: Params }) => {
     return { id: params.id };

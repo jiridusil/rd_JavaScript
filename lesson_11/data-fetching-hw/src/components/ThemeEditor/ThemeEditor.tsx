@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { ColorPicker } from "antd";
 import { Button } from "antd";
-import { Options } from "../Types/General";
+import { Options } from "../Types/GeneralTypes";
+import { useTheme } from "../ThemeContext";
 
 
 export const ThemeEditor: React.FC = () => {
+    const { setPrimaryColor, setSecondaryColor, setBackgroundColor, setHeaderColor, setTextColor,
+        setButtonColor, setButtonHoverColor } = useTheme();
+
     const [themesArray, setThemesArray] = useState<Options[]>([]);
 
     useEffect(() => {
@@ -65,19 +69,40 @@ export const ThemeEditor: React.FC = () => {
                             <tr key={index}>
                                 <td className='border px-4 py-2'><b>{theme.themeName}</b></td>
                                 <td className='border px-4 py-2'><ColorPicker defaultValue={theme.primaryColor}
-                                    onChange={(color) => { theme.primaryColor = color.toHexString() }} /></td>
+                                    onChange={(color) => {
+                                        theme.primaryColor = color.toHexString();
+                                        setPrimaryColor(color.toHexString());
+                                    }} /></td>
                                 <td className='border px-4 py-2'><ColorPicker defaultValue={theme.secondaryColor}
-                                    onChange={(color) => { theme.secondaryColor = color.toHexString() }} /></td>
+                                    onChange={(color) => {
+                                        theme.secondaryColor = color.toHexString();
+                                        setSecondaryColor(color.toHexString());
+                                    }} /></td>
                                 <td className='border px-4 py-2'><ColorPicker defaultValue={theme.textColor}
-                                    onChange={(color) => { theme.textColor = color.toHexString() }} /></td>
+                                    onChange={(color) => {
+                                        theme.textColor = color.toHexString();
+                                        setTextColor(color.toHexString());
+                                    }} /></td>
                                 <td className='border px-4 py-2'><ColorPicker defaultValue={theme.headerColor}
-                                    onChange={(color) => { theme.headerColor = color.toHexString() }} /></td>
+                                    onChange={(color) => {
+                                        theme.headerColor = color.toHexString();
+                                        setHeaderColor(color.toHexString());
+                                    }} /></td>
                                 <td className='border px-4 py-2'><ColorPicker defaultValue={theme.backgroundColor}
-                                    onChange={(color) => { theme.backgroundColor = color.toHexString() }} /></td>
+                                    onChange={(color) => {
+                                        theme.backgroundColor = color.toHexString();
+                                        setBackgroundColor(color.toHexString());
+                                    }} /></td>
                                 <td className='border px-4 py-2'><ColorPicker defaultValue={theme.buttonColor}
-                                    onChange={(color) => { theme.buttonColor = color.toHexString() }} /></td>
+                                    onChange={(color) => {
+                                        theme.buttonColor = color.toHexString();
+                                        setButtonColor(color.toHexString());
+                                    }} /></td>
                                 <td className='border px-4 py-2'><ColorPicker defaultValue={theme.buttonHoverColor}
-                                    onChange={(color) => { theme.buttonHoverColor = color.toHexString() }} /></td>
+                                    onChange={(color) => {
+                                        theme.buttonHoverColor = color.toHexString();
+                                        setButtonHoverColor(color.toHexString());
+                                    }} /></td>
                                 <td className='border px-4 py-2'>
                                     <Button className='mx-1' type="primary"
                                         onClick={() => { updateTheme(theme) }} >Update</Button>
@@ -90,4 +115,4 @@ export const ThemeEditor: React.FC = () => {
             </div>
         </>
     )
-}   
+}
