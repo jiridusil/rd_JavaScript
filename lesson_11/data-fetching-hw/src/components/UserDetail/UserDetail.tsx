@@ -1,33 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, Params, useLoaderData } from "react-router-dom";
+import { Params, useLoaderData } from "react-router-dom";
 import { useTheme } from "../ThemeContext";
+import { User } from "../Types/General";
 
 export const userDetailLoader = async ({ params }: { params: Params }) => {
     return { id: params.id };
-}
-
-type User = {
-    id: number
-    name: string
-    username: string
-    email: string
-    address?: {
-        street: string
-        suite: string
-        city: string
-        zipcode: string
-        geo: {
-            lat: string
-            lng: string
-        }
-    }
-    phone: string
-    website: string
-    company?: {
-        name: string
-        catchPhrase: string
-        bs: string
-    }
 }
 
 export const UserDetail = () => {
@@ -54,12 +31,6 @@ export const UserDetail = () => {
         };
         fetchData();
     }, [url]);
-
-    // useEffect(() => {
-    //     console.log('theme3: ', theme);
-    //     console.log('backgroundColor3: ', backgroundColor);
-    //     console.log('textColor3: ', textColor);
-    // }, [theme, backgroundColor, textColor]);
 
     return (
         <div className={'flex flex-direction-column justify-center min-h-screen'}

@@ -1,30 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "../ThemeContext";
 import { Link } from "react-router-dom";
-
-type User = {
-    id: number
-    name: string
-    username: string
-    email: string
-    address?: {
-        street: string
-        suite: string
-        city: string
-        zipcode: string
-        geo: {
-            lat: string
-            lng: string
-        }
-    }
-    phone: string
-    website: string
-    company?: {
-        name: string
-        catchPhrase: string
-        bs: string
-    }
-}
+import { User } from "../Types/General";
 
 export const UserList = () => {
     const url = 'https://jsonplaceholder.typicode.com/users';

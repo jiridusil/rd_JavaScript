@@ -1,37 +1,15 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import { useState } from 'react';
 import Modal from 'react-modal';
 import { button } from '../Styles';
 import { UserList } from '../UserList/UserList';
-import { buttonGray } from '../Styles/Style';
-import { useTheme } from '../ThemeContext';
-
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
-};
-
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-// Modal.setAppElement('#yourAppElement');
+import { buttonGray, modalStyles } from '../Styles/Style';
 
 export const UserListModal = () => {
-    // let subtitle: any;
     const [modalIsOpen, setIsOpen] = useState(false);
 
     function openModal() {
         setIsOpen(true);
     }
-
-    // function afterOpenModal() {
-    //     // references are now sync'd and can be accessed.
-    //     subtitle.style.color = 'gray';
-    // }
 
     function closeModal() {
         setIsOpen(false);
@@ -41,9 +19,8 @@ export const UserListModal = () => {
             <button onClick={openModal} style={button}>Preview User List</button>
             <Modal
                 isOpen={modalIsOpen}
-                // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
-                style={customStyles}
+                style={modalStyles}
                 contentLabel="Example Modal"
             >
                 <div style={{ maxHeight: '80vh', overflowY: 'auto' }}>

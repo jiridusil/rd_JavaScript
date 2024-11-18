@@ -6,17 +6,7 @@ import { useState } from 'react';
 import { UserDetailModal } from '../UserDetailModal';
 import { UserListModal } from '../UserListModal';
 import { useTheme } from '../ThemeContext';
-
-type Options = {
-    themeName: string
-    primaryColor: string
-    secondaryColor: string
-    textColor: string
-    headerColor: string
-    backgroundColor: string
-    buttonColor: string
-    buttonHoverColor: string
-}
+import { Options } from '../Types/General';
 
 export const ThemeForm = () => {
     const { theme, textColor, setTextColor, backgroundColor, setBackgroundColor
@@ -37,6 +27,8 @@ export const ThemeForm = () => {
         const themes = JSON.parse(localStorage.getItem('themes')!);
 
         const name = (event.target as HTMLFormElement).themeName.value
+
+        //alert if name is empty
         if (!name) {
             const alertBox = document.createElement('div');
             alertBox.textContent = 'Please type a name for your theme';

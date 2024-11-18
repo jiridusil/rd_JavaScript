@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import { useState } from 'react';
 import Modal from 'react-modal';
 import { button } from '../Styles';
-import { UserDetail } from '../UserDetail';
 import { useTheme } from '../ThemeContext';
 import { Link } from 'react-router-dom';
 import { buttonGray } from '../Styles/Style';
@@ -18,42 +16,24 @@ const customStyles = {
     },
 };
 
-type Props = {
-    textColor: string;
-    backgroundColor: string;
-}
-
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-// Modal.setAppElement('#yourAppElement');
-
 export const UserDetailModal = () => {
-    // let subtitle: any;
     const [modalIsOpen, setIsOpen] = useState(false);
     const { textColor, backgroundColor, headerColor } = useTheme();
 
-    function openModal() {
-        setIsOpen(true);
-    }
-
-    // function afterOpenModal() {
-    //     // references are now sync'd and can be accessed.
-    //     subtitle.style.color = 'gray';
-    // }
-
+    function openModal() { setIsOpen(true); }
     function closeModal() {
         setIsOpen(false);
+
     }
     return (
         <>
             <button onClick={openModal} style={button}>Preview User Detail</button>
             <Modal
                 isOpen={modalIsOpen}
-                // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
             >
-                {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>User Detail page</h2> */}
                 <form>
                     <div className="flex flex-direction-column justify-center items-center"
                         style={{ background: backgroundColor, padding: '10px' }}>

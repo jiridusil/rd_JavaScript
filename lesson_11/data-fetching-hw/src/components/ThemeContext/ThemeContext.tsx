@@ -1,31 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { darkColor, lightColor, defaultHeaderColor } from "../Styles/colorConstants";
+import { Theme, Options, ThemeContextType } from "../Types/General";
 
-type Theme = 'light' | 'dark';
-
-type ThemeContextType = {
-    theme: Theme;
-    toggleTheme: () => void;
-    backgroundColor: string;
-    setBackgroundColor: (color: string) => void;
-    textColor: string;
-    setTextColor: (color: string) => void;
-    headerColor: string;
-    setHeaderColor: (color: string) => void;
-    optionsNew: Options[];
-    addTheme: (theme: Options) => void;
-}
-
-type Options = {
-    themeName: string
-    primaryColor: string
-    secondaryColor: string
-    textColor: string
-    headerColor: string
-    backgroundColor: string
-    buttonColor: string
-    buttonHoverColor: string
-}
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -51,7 +27,6 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         setOptions((prevOptions) => [...prevOptions, theme]);
         localStorage.setItem('themes', JSON.stringify([...options, theme]));
     };
-
 
     return (
         <ThemeContext.Provider

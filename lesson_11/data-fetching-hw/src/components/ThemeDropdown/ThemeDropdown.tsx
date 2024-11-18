@@ -1,17 +1,7 @@
 import { useState } from "react";
 import { useTheme } from "../ThemeContext";
 import { useEffect } from "react";
-
-type Options = {
-    themeName: string
-    primaryColor: string
-    secondaryColor: string
-    textColor: string
-    headerColor: string
-    backgroundColor: string
-    buttonColor: string
-    buttonHoverColor: string
-}
+import { Options } from "../Types/General";
 
 export const ThemeDropdown: React.FC = () => {
     const { setTextColor, setBackgroundColor, setHeaderColor, optionsNew } = useTheme();

@@ -3,7 +3,6 @@ import { useTheme } from "../ThemeContext";
 export const ThemeButton: React.FC = () => {
     const { theme, toggleTheme, textColor, backgroundColor } = useTheme();
 
-
     return (
         <div>
 

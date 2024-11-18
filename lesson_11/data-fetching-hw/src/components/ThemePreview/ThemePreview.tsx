@@ -12,9 +12,7 @@ type Props = {
 export const ThemePreview = ({ primaryColor, secondaryColor, headerColor, buttonColor }: Props) => {
     const { textColor, backgroundColor } = useTheme();
 
-    const table = {
-        margin: '20px',
-    }
+    const table = { margin: '20px', }
     const primaryButton = {
         margin: '10px',
         backgroundColor: primaryColor

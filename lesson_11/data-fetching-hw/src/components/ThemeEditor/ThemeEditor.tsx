@@ -1,23 +1,11 @@
 import { useEffect, useState } from "react";
-import { useTheme } from "../ThemeContext";
 import { ColorPicker } from "antd";
 import { Button } from "antd";
+import { Options } from "../Types/General";
 
-type Options = {
-    themeName: string
-    primaryColor: string
-    secondaryColor: string
-    textColor: string
-    headerColor: string
-    backgroundColor: string
-    buttonColor: string
-    buttonHoverColor: string
-}
 
 export const ThemeEditor: React.FC = () => {
-    const { setTextColor, setBackgroundColor, setHeaderColor, optionsNew } = useTheme();
     const [themesArray, setThemesArray] = useState<Options[]>([]);
-    const [backgroundColor1, setBackGroundColor1] = useState<string>('');
 
     useEffect(() => {
         const storedThemes = localStorage.getItem('themes');
@@ -56,12 +44,8 @@ export const ThemeEditor: React.FC = () => {
                 <h1 className='text-2xl font-bold'>Theme Editor</h1>
                 <p>Kliknutím na příslušnou barvu a následným kliknutím na tlačítko <b>Save</b> můžeme změnit barvu daného elementu.</p>
                 <p>Případně je možné Theme smazat kliknutím na lačítko <b>Delete</b></p>
-
             </div>
-
             <div className='flex items-center justify-center'>
-
-
                 <table className='table-auto'>
                     <thead>
                         <tr>
