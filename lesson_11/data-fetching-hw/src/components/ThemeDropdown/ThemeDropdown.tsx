@@ -24,7 +24,7 @@ export const ThemeDropdown: React.FC = () => {
         if (storedThemes) {
             const themesArray = JSON.parse(storedThemes);
             // addTheme(themesArray);
-            options.push(themesArray);
+            // options.push(themesArray);
             setOption(themesArray);
             if (themesArray.length > 0) {
                 setSelectedTheme(themesArray[themesArray.length - 1].themeName);
