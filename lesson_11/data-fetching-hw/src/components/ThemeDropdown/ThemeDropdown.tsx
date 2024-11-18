@@ -4,8 +4,9 @@ import { useEffect } from "react";
 import { Options } from "../Types/GeneralTypes";
 
 export const ThemeDropdown: React.FC = () => {
-    const { setPrimaryColor, setSecondaryColor, setBackgroundColor, setHeaderColor, setTextColor,
-        setButtonColor, setButtonHoverColor, optionsNew, selectedTheme, setSelectedTheme } = useTheme();
+    const { setPrimaryColor, setSecondaryColor, backgroundColor, setBackgroundColor, setHeaderColor,
+        textColor, setTextColor, setButtonColor, setButtonHoverColor, optionsNew, selectedTheme,
+        setSelectedTheme } = useTheme();
     const [options, setOption] = useState<Options[]>([]);
 
     useEffect(() => {
@@ -36,7 +37,10 @@ export const ThemeDropdown: React.FC = () => {
             <select onChange={handleThemeChange}
                 value={selectedTheme}
                 className='rounded-md px-3 py-2 mx-3 text-sm font-medium pr-10'
-                style={{ width: `${selectedTheme.length * 8 + 50}px` }}
+                style={{
+                    width: `${selectedTheme.length * 8 + 50}px`, background: backgroundColor,
+                    color: textColor, border: `1px solid ${textColor}`
+                }}
             >
                 <option value='Theme'>Themes</option>
                 {options.map((option, index) => (

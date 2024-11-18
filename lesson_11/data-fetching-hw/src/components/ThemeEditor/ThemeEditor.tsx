@@ -6,7 +6,7 @@ import { useTheme } from "../ThemeContext";
 
 
 export const ThemeEditor: React.FC = () => {
-    const { setPrimaryColor, setSecondaryColor, setBackgroundColor, setHeaderColor, setTextColor,
+    const { textColor, setPrimaryColor, setSecondaryColor, setBackgroundColor, setHeaderColor, setTextColor,
         setButtonColor, setButtonHoverColor } = useTheme();
 
     const [themesArray, setThemesArray] = useState<Options[]>([]);
@@ -44,12 +44,12 @@ export const ThemeEditor: React.FC = () => {
 
     return (
         <>
-            <div className='text-center'>
+            <div className='text-center' style={{ color: textColor }}>
                 <h1 className='text-2xl font-bold'>Theme Editor</h1>
                 <p>Kliknutím na příslušnou barvu a následným kliknutím na tlačítko <b>Save</b> můžeme změnit barvu daného elementu.</p>
                 <p>Případně je možné Theme smazat kliknutím na lačítko <b>Delete</b></p>
             </div>
-            <div className='flex items-center justify-center'>
+            <div className='flex items-center justify-center' style={{ color: textColor }}>
                 <table className='table-auto'>
                     <thead>
                         <tr>
