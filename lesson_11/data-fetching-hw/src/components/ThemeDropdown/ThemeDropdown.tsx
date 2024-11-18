@@ -29,7 +29,7 @@ export const ThemeDropdown: React.FC = () => {
             if (themesArray.length > 0) {
                 setSelectedTheme(themesArray[themesArray.length - 1].themeName);
             }
-            // console.log('themesArray', themesArray);
+            console.log('themesArray', themesArray);
         }
     }, [optionsNew]);
 

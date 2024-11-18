@@ -10,6 +10,7 @@ import { UserListPage } from './components/pages/UserListPage';
 import { ThemeFormPage } from './components/pages/ThemeFormPage';
 import { UserDetailPage } from './components/pages/UserDetailPage';
 import { userDetailLoader } from './components/UserDetail';
+import { ThemeEditorPage } from './components/pages/ThemeEditorPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     {
       path: '/theme-form',
       element: <ThemeFormPage />
+    },
+    {
+      path: '/theme-editor',
+      element: <ThemeEditorPage />
     },
     {
       path: '/user/:id',

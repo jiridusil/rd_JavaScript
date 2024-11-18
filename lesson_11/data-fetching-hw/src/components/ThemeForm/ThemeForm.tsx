@@ -57,6 +57,7 @@ export const ThemeForm = () => {
             themeName: name,
             primaryColor,
             secondaryColor,
+            textColor,
             headerColor,
             backgroundColor,
             buttonColor,
@@ -65,7 +66,7 @@ export const ThemeForm = () => {
 
         addTheme({
             themeName: name,
-            textColor: textColor,
+            textColor,
             primaryColor,
             secondaryColor,
             headerColor,

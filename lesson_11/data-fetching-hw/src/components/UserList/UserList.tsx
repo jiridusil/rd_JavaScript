@@ -66,7 +66,6 @@ export const UserList = () => {
             </div>
         );
     }
-    console.log('headerColor: ', headerColor);
 
     return (
         <div className='flex flex-direction-column justify-center items-center min-h-screen'

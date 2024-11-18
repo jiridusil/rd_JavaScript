@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 import { ThemeButton } from '../ThemeButton'
 import { useTheme } from '../ThemeContext';
 import { ThemeDropdown } from '../ThemeDropdown';
-import { SettingsMenu } from '../Settings';
 
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
     { name: 'User List', href: '/user-list', current: false },
-    { name: 'Theme Editor', href: '/theme-form', current: false },
+    { name: 'Theme Form', href: '/theme-form', current: false },
+    { name: 'Theme Editor', href: '/theme-editor', current: false },
 ]
 
 export const classNames = (...classes: Array<string | boolean>) => {
@@ -66,7 +66,6 @@ export const Header = () => {
                         <div className="flex flex-shrink-0 items-center">
                             <ThemeButton />
                             <ThemeDropdown />
-                            <SettingsMenu />
                         </div>
 
                     </div>
