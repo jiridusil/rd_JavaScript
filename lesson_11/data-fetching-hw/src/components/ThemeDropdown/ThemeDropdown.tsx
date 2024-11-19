@@ -34,9 +34,10 @@ export const ThemeDropdown: React.FC = () => {
 
     return (
         <div className='flex items-center justify-center'>
+            <div className='text-l font-semibold' style={{ color: textColor }}>Select Theme:</div>
             <select onChange={handleThemeChange}
                 value={selectedTheme}
-                className='rounded-md px-3 py-2 mx-3 text-sm font-medium pr-10'
+                className='rounded-md px-3 py-2 mx-2 text-sm font-medium pr-10'
                 style={{
                     width: `${selectedTheme.length * 8 + 50}px`, background: backgroundColor,
                     color: textColor, border: `1px solid ${textColor}`

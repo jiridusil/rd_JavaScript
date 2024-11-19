@@ -20,7 +20,11 @@ export const UserDetailModal = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const { textColor, backgroundColor, headerColor, buttonColor, buttonHoverColor } = useTheme();
 
-    function openModal() { setIsOpen(true); }
+    function openModal(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        setIsOpen(true);
+    }
+
     function closeModal() {
         setIsOpen(false);
 

@@ -9,9 +9,12 @@ export const UserListModal = () => {
     const { textColor, buttonColor, buttonHoverColor } = useTheme();
     const [modalIsOpen, setIsOpen] = useState(false);
 
-    function openModal() {
+
+    function openModal(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
         setIsOpen(true);
     }
+
 
     function closeModal() {
         setIsOpen(false);
